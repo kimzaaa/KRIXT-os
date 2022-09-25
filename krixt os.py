@@ -41,20 +41,27 @@ class Window(QMainWindow,QWidget):
 ╚═╝░░░░░╚═╝░░╚═╝░╚════╝░░╚═════╝░╚═╝░░╚═╝╚═╝░░╚═╝╚═╝░░░░░╚═╝╚═════╝░
 
         '''
-
         self.uih = QLabel(" ",self)
         self.cb = Button(" ", self)
         self.bb = QPushButton(" ",self)
+        
+        self.button = QPushButton(" ", self)
+        self.button.setGeometry(460,950,1000,10)
+        self.button.setStyleSheet("background-image : url(C:/Users/kim/Desktop/coding/KRIXT-os/white.png); border-radius : 20")
+        self.cb.setVisible(False)
+        self.bb.setVisible(False)
+        self.uih.setVisible(False)
+        self.button.clicked.connect(self.doAnimation)
 
-        self.uih.setGeometry(380,100,1180,820)
+        #self.uih.setGeometry(380,100,1180,820)
         self.cb.setFixedSize(100,100)
         self.bb.setFixedSize(100,100)
 
-        self.cb.setStyleSheet("background-image : url(C:/Users/kim/Desktop/coding/KRIXT-os/calcmedlogov6.png); border : none")
-        self.bb.setStyleSheet("background-image : url(C:/Users/kim/Desktop/coding/KRIXT-os/kiconv3.png); border : none")
-        self.uih.setStyleSheet("background-image : url(C:/Users/kim/Desktop/coding/KRIXT-os/rbg3.png)")
+        self.cb.setStyleSheet("background-image : url(C:/Users/kim/Desktop/coding/KRIXT-os/calcmedlogov6.png); border-radius : 10")
+        self.bb.setStyleSheet("background-image : url(C:/Users/kim/Desktop/coding/KRIXT-os/kiconv3.png); border-radius : 10")
+        self.uih.setStyleSheet("background-image : url(C:/Users/kim/Desktop/coding/KRIXT-os/rbg3.png); border-radius : 20")
         self.opacity_effect = QGraphicsOpacityEffect()
-        self.opacity_effect.setOpacity(0.7)
+        self.opacity_effect.setOpacity(0.6)
         self.uih.setGraphicsEffect(self.opacity_effect)
 
         
@@ -62,8 +69,9 @@ class Window(QMainWindow,QWidget):
         self.bb.clicked.connect(self.openbrowser)
 
         #self.uih.move(380,100)
-        self.cb.move(400,124)
-        self.bb.move(510,124)
+        #self.cb.move(400,124)
+        #self.bb.move(510,124)
+    
 
         '''
         
@@ -75,7 +83,6 @@ class Window(QMainWindow,QWidget):
 ╚═╝░░░░░╚═╝░░╚═╝░╚════╝░░╚═════╝░╚═╝░░╚═╝╚═╝░░╚═╝╚═╝░░░░░╚═╝╚═════╝░  ╚══════╝╚═╝░░╚══╝╚═════╝░
         
         '''
-
         '''
         
 ░█████╗░░█████╗░██╗░░░░░░█████╗░██╗░░░██╗██╗░░░░░░█████╗░████████╗░█████╗░██████╗░
@@ -127,7 +134,7 @@ class Window(QMainWindow,QWidget):
         self.btn_clear.setFixedSize(205,100)
         self.btn_close.setFixedSize(25,25)
 
-        self.container.setStyleSheet("background-image : url(C:/Users/kim/Desktop/coding/KRIXT-os/rbg3.png)")
+        self.container.setStyleSheet("background-image : url(C:/Users/kim/Desktop/coding/KRIXT-os/rbg3.png); border-radius : 20")
         self.btn_close.setStyleSheet("background-image : url(C:/Users/kim/Desktop/coding/KRIXT-os/sxc.png); border : none ")
         self.btn_9.setStyleSheet("background-image : url(C:/Users/kim/Desktop/coding/KRIXT-os/9c.png); border : none")
         self.btn_8.setStyleSheet("background-image : url(C:/Users/kim/Desktop/coding/KRIXT-os/8c.png); border : none")
@@ -205,7 +212,32 @@ class Window(QMainWindow,QWidget):
 ░╚════╝░╚═╝░░╚═╝╚══════╝░╚════╝░░╚═════╝░╚══════╝╚═╝░░╚═╝░░░╚═╝░░░░╚════╝░╚═╝░░╚═╝  ╚═════╝░╚══════╝╚═╝░░░░░
     
     '''
-        
+
+    def doAnimation(self):
+        self.anim = QPropertyAnimation(self.uih, b"geometry")
+        self.anim2 = QPropertyAnimation(self.cb, b"geometry")
+        self.anim3 = QPropertyAnimation(self.bb, b"geometry")
+
+        self.cb.setVisible(True)
+        self.bb.setVisible(True)
+        self.uih.setVisible(True)
+
+        self.anim.setDuration(500)
+        self.anim2.setDuration(500)
+        self.anim3.setDuration(500)
+
+        self.anim.setStartValue(QRect(380,1000,1180,820))
+        self.anim.setEndValue(QRect(380,100,1180,820))
+
+        self.anim2.setStartValue(QRect(400,1000,100,100))
+        self.anim2.setEndValue(QRect(400,120,100,100))
+
+        self.anim3.setStartValue(QRect(510,1000,100,100))
+        self.anim3.setEndValue(QRect(510,120,100,100))
+
+        self.anim.start()
+        self.anim2.start()
+        self.anim3.start()
 
     def num_press(self,key_number):
         self.temp_nums.append(key_number)
@@ -268,8 +300,6 @@ class Window(QMainWindow,QWidget):
     def click(self):
         
         self.container.setVisible(True)
-
-        #os.system("C:/Users/kim/Desktop/coding/KRIXT-os/dist/calc/calc.exe")
         
     def openbrowser(self):
         os.system("C:/Users/kim/Desktop/coding/KRIXT-os/browser/browser.exe")
