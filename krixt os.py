@@ -14,7 +14,6 @@ class Button(QPushButton):
             drag = QDrag(self)
             drag.setMimeData(mimeData)
             drag.exec_(Qt.MoveAction)
-
   
 class Window(QMainWindow,QWidget):
     def __init__(self):
@@ -34,22 +33,36 @@ class Window(QMainWindow,QWidget):
         self.uih = QLabel(" ",self)
         self.cb = Button(" ", self)
         self.bb = QPushButton(" ",self)
-        
+        self.nauih = QLabel(" ",self)
+        self.note = QPlainTextEdit(" ",self)
+      
         self.button = QPushButton(" ", self)
         self.button.setGeometry(460,950,1000,10)
-        self.button.setStyleSheet("background-image : url(C:/Users/kim/Desktop/coding/KRIXT-os/white.png); border-radius : 20")
+        self.button.setStyleSheet("background-image : url(C:/Users/kim/Desktop/coding/KRIXT-os/white.png); border-radius : 20px")
+        self.button.setVisible(True)
+
+        self.button2 = QPushButton(" ", self)
+        self.button2.setGeometry(485,950,1000,10)
+        self.button2.setStyleSheet("background-image : url(C:/Users/kim/Desktop/coding/KRIXT-os/white.png); border-radius : 20")
+        self.button2.setVisible(False)
+
         self.cb.setVisible(False)
         self.bb.setVisible(False)
         self.uih.setVisible(False)
         self.button.clicked.connect(self.doAnimation)
+        self.button2.clicked.connect(self.dostopAnimation)
 
         #self.uih.setGeometry(380,100,1180,820)
         self.cb.setFixedSize(100,100)
         self.bb.setFixedSize(100,100)
+        self.nauih.setFixedSize(435,220)
+        self.note.setFixedSize(415,200)
 
         self.cb.setStyleSheet("background-image : url(C:/Users/kim/Desktop/coding/KRIXT-os/calcmedlogov6.png); border-radius : 10")
         self.bb.setStyleSheet("background-image : url(C:/Users/kim/Desktop/coding/KRIXT-os/kiconv3.png); border-radius : 10")
         self.uih.setStyleSheet("background-image : url(C:/Users/kim/Desktop/coding/KRIXT-os/rbg3.png); border-radius : 20")
+        self.nauih.setStyleSheet("background-image : url(C:/Users/kim/Desktop/coding/KRIXT-os/rbg3.png); border-radius : 20")
+        self.note.setStyleSheet("background-image : url(C:/Users/kim/Desktop/coding/KRIXT-os/rbg3.png); border: none; color : white; font : Coco Gothic; font-size : 10pt") #will set our own font style 
         self.opacity_effect = QGraphicsOpacityEffect()
         self.opacity_effect.setOpacity(0.6)
         self.uih.setGraphicsEffect(self.opacity_effect)
@@ -61,6 +74,8 @@ class Window(QMainWindow,QWidget):
         #self.uih.move(380,100)
         #self.cb.move(400,124)
         #self.bb.move(510,124)
+        self.nauih.move(1110,680)
+        self.note.move(1120,690)
 
 
         self.btn_close = QPushButton(" ",clicked = self.closecalc)
@@ -146,6 +161,10 @@ class Window(QMainWindow,QWidget):
 
         #creating a grid in the uih window
 
+        
+        #wip
+
+
         self.showMaximized()
         #self.showFullScreen()
         self.setStyleSheet("background-image : url(C:/Users/kim/Desktop/coding/KRIXT-os/Krixtbg.png);")
@@ -156,6 +175,8 @@ class Window(QMainWindow,QWidget):
         self.show()
 
     def doAnimation(self):
+        self.button.setVisible(False)
+        self.button2.setVisible(True)
         self.anim = QPropertyAnimation(self.uih, b"geometry")
         self.anim2 = QPropertyAnimation(self.cb, b"geometry")
         self.anim3 = QPropertyAnimation(self.bb, b"geometry")
@@ -164,9 +185,9 @@ class Window(QMainWindow,QWidget):
         self.bb.setVisible(True)
         self.uih.setVisible(True)
 
-        self.anim.setDuration(500)
-        self.anim2.setDuration(500)
-        self.anim3.setDuration(500)
+        self.anim.setDuration(300)
+        self.anim2.setDuration(300)
+        self.anim3.setDuration(300)
 
         self.anim.setStartValue(QRect(380,1000,1180,820))
         self.anim.setEndValue(QRect(380,100,1180,820))
@@ -176,6 +197,36 @@ class Window(QMainWindow,QWidget):
 
         self.anim3.setStartValue(QRect(510,1000,100,100))
         self.anim3.setEndValue(QRect(510,120,100,100))
+
+        self.anim.start()
+        self.anim2.start()
+        self.anim3.start()
+
+        
+
+    def dostopAnimation(self):
+        self.button.setVisible(True)
+        self.button2.setVisible(False)
+        self.anim = QPropertyAnimation(self.uih, b"geometry")
+        self.anim2 = QPropertyAnimation(self.cb, b"geometry")
+        self.anim3 = QPropertyAnimation(self.bb, b"geometry")
+
+        self.cb.setVisible(True)
+        self.bb.setVisible(True)
+        self.uih.setVisible(True)
+
+        self.anim.setDuration(300)
+        self.anim2.setDuration(300)
+        self.anim3.setDuration(300)
+
+        self.anim.setStartValue(QRect(380,100,1180,820))
+        self.anim.setEndValue(QRect(380,1000,1180,820))
+
+        self.anim2.setStartValue(QRect(400,120,100,100))
+        self.anim2.setEndValue(QRect(400,1000,100,100))
+
+        self.anim3.setStartValue(QRect(510,120,100,100))
+        self.anim3.setEndValue(QRect(510,1000,100,100))
 
         self.anim.start()
         self.anim2.start()
@@ -240,4 +291,4 @@ custom browser
 '''
 
 # how i name my update
-# [Version-changes(in short)-G/B/M(good or bad or mid)-p/np/r/F(prototype not prototype or release or fixes)]
+# [Version-changes(in short)-Version of the new update(optional or when added a new program here)-G/B/M(good or bad or mid)-p/np/r/F(prototype not prototype or release or fixes)]
