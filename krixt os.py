@@ -1,3 +1,4 @@
+from tkinter import font
 from PyQt5.QtWidgets import * 
 from PyQt5.QtGui import * 
 from PyQt5.QtCore import *
@@ -21,6 +22,10 @@ class Window(QMainWindow,QWidget):
 
         self.setWindowTitle("KRIXT")
         self.setWindowIcon(QIcon("C:/Users/kim/Desktop/coding/KRIXT-os/kicon.png"))
+
+        #fonts
+        QFontDatabase.addApplicationFont("Coco Gothic.ttf")
+        font = QFont("Coco Gothic", 10)
 
         self.resize(1920, 1080)
         self.setAcceptDrops(True)
@@ -56,13 +61,14 @@ class Window(QMainWindow,QWidget):
         self.cb.setFixedSize(100,100)
         self.bb.setFixedSize(100,100)
         self.nauih.setFixedSize(435,220)
-        self.note.setFixedSize(415,200)
+        self.note.setFixedSize(410,195)
 
         self.cb.setStyleSheet("background-image : url(C:/Users/kim/Desktop/coding/KRIXT-os/calcmedlogov6.png); border-radius : 10")
         self.bb.setStyleSheet("background-image : url(C:/Users/kim/Desktop/coding/KRIXT-os/kiconv3.png); border-radius : 10")
         self.uih.setStyleSheet("background-image : url(C:/Users/kim/Desktop/coding/KRIXT-os/rbg3.png); border-radius : 20")
         self.nauih.setStyleSheet("background-image : url(C:/Users/kim/Desktop/coding/KRIXT-os/rbg3.png); border-radius : 20")
-        self.note.setStyleSheet("background-image : url(C:/Users/kim/Desktop/coding/KRIXT-os/rbg3.png); border: none; color : white; font : Coco Gothic; font-size : 10pt") #will set our own font style 
+        self.note.setStyleSheet("background-image : url(C:/Users/kim/Desktop/coding/KRIXT-os/rbg3.png); border: none; color : white; font-size : 13pt") 
+        self.note.setFont(font)
         self.opacity_effect = QGraphicsOpacityEffect()
         self.opacity_effect.setOpacity(0.6)
         self.uih.setGraphicsEffect(self.opacity_effect)
