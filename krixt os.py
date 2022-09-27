@@ -1,3 +1,4 @@
+from operator import truediv
 from tkinter import font
 from PyQt5.QtWidgets import * 
 from PyQt5.QtGui import * 
@@ -35,6 +36,7 @@ class Window(QMainWindow,QWidget):
         
         self.container.setVisible(False)
 
+        self.tbui = QLabel(" ", self)
         self.uih = QLabel(" ",self)
         self.cb = Button(" ", self)
         self.bb = QPushButton(" ",self)
@@ -42,6 +44,7 @@ class Window(QMainWindow,QWidget):
         self.nauih = QLabel(" ",self)
         self.note = QPlainTextEdit(" ",self)
         self.cnb = QPushButton(" ",self)
+        self.tbui2 = QLabel(" ", self)
       
         self.button = QPushButton(" ", self)
         self.button.setGeometry(460,950,1000,10)
@@ -53,16 +56,15 @@ class Window(QMainWindow,QWidget):
         self.button2.setStyleSheet("background-image : url(C:/Users/kim/Desktop/coding/KRIXT-os/white.png); border-radius : 20")
         self.button2.setVisible(False)
 
-        self.cb.setVisible(False)
-        self.bb.setVisible(False)
         self.uih.setVisible(False)
         self.nauih.setVisible(False)
         self.note.setVisible(False)
-        self.nb.setVisible(False)
         self.cnb.setVisible(False)
+        self.tbui.setVisible(True)
+        self.tbui2.setVisible(True)
         self.button.clicked.connect(self.doAnimation)
         self.button2.clicked.connect(self.dostopAnimation)
-
+        
         #self.uih.setGeometry(380,100,1180,820)
         self.cb.setFixedSize(100,100)
         self.bb.setFixedSize(100,100)
@@ -70,6 +72,8 @@ class Window(QMainWindow,QWidget):
         self.nauih.setFixedSize(435,220)
         self.note.setFixedSize(410,195)
         self.cnb.setFixedSize(25,25)
+        self.tbui.setFixedSize(120,840)
+        self.tbui2.setFixedSize(120,840)
 
         self.cb.setStyleSheet("background-image : url(C:/Users/kim/Desktop/coding/KRIXT-os/calcmedlogov6.png); border-radius : 10")
         self.bb.setStyleSheet("background-image : url(C:/Users/kim/Desktop/coding/KRIXT-os/kiconv3.png); border-radius : 10")
@@ -82,6 +86,14 @@ class Window(QMainWindow,QWidget):
         self.opacity_effect = QGraphicsOpacityEffect()
         self.opacity_effect.setOpacity(0.6)
         self.uih.setGraphicsEffect(self.opacity_effect)
+        self.tbui.setStyleSheet("background-image : url(C:/Users/kim/Desktop/coding/KRIXT-os/white.png); border-radius : 20")
+        self.opacity_effect = QGraphicsOpacityEffect()
+        self.opacity_effect.setOpacity(0.7)
+        self.tbui.setGraphicsEffect(self.opacity_effect)
+        self.tbui2.setStyleSheet("background-image : url(C:/Users/kim/Desktop/coding/KRIXT-os/white.png); border-radius : 20")
+        self.opacity_effect = QGraphicsOpacityEffect()
+        self.opacity_effect.setOpacity(0)
+        self.tbui2.setGraphicsEffect(self.opacity_effect)
 
         
         self.cb.clicked.connect(self.click)
@@ -89,12 +101,14 @@ class Window(QMainWindow,QWidget):
         self.nb.clicked.connect(self.opennotes)
         self.cnb.clicked.connect(self.closenotes)
 
-        #self.uih.move(380,100)
-        #self.cb.move(400,124)
-        #self.bb.move(510,124)
+        self.uih.move(380,100)
+        self.cb.move(60,90)
+        self.bb.move(60,200)
+        self.nb.move(60,310)
         self.nauih.move(1110,680)
         self.note.move(1135,690)
         self.cnb.move(1120,690)
+        self.tbui.move(50,80)
 
 
         self.btn_close = QPushButton(" ",clicked = self.closecalc)
@@ -179,8 +193,7 @@ class Window(QMainWindow,QWidget):
         self.container.move(1110,115) # how to move the entire program container
 
         #creating a grid in the uih window
-
-        
+       
         #wip
 
 
@@ -196,74 +209,36 @@ class Window(QMainWindow,QWidget):
     def doAnimation(self):
         self.button.setVisible(False)
         self.button2.setVisible(True)
+        self.tbui2.setVisible(False)
         self.anim = QPropertyAnimation(self.uih, b"geometry")
-        self.anim2 = QPropertyAnimation(self.cb, b"geometry")
-        self.anim3 = QPropertyAnimation(self.bb, b"geometry")
-        self.anim4 = QPropertyAnimation(self.nb, b"geometry")
 
-        self.cb.setVisible(True)
-        self.bb.setVisible(True)
         self.uih.setVisible(True)
-        self.nb.setVisible(True)
-
+        
         self.anim.setDuration(300)
-        self.anim2.setDuration(300)
-        self.anim3.setDuration(300)
-        self.anim4.setDuration(300)
 
         self.anim.setStartValue(QRect(380,1000,1180,820))
         self.anim.setEndValue(QRect(380,100,1180,820))
 
-        self.anim2.setStartValue(QRect(400,1000,100,100))
-        self.anim2.setEndValue(QRect(400,120,100,100))
-
-        self.anim3.setStartValue(QRect(510,1000,100,100))
-        self.anim3.setEndValue(QRect(510,120,100,100))
-
-        self.anim4.setStartValue(QRect(620,1000,100,100))
-        self.anim4.setEndValue(QRect(620,120,100,100))
-
-        self.anim.start()
-        self.anim2.start()
-        self.anim3.start()
-        self.anim4.start() 
-
-        
+        self.anim.start()     
 
     def dostopAnimation(self):
+        self.tbui2.setVisible(True)
         self.button.setVisible(True)
         self.button2.setVisible(False)
+        self.container.setVisible(False)
+        self.note.setVisible(False)
+        self.cnb.setVisible(False)
+        self.nauih.setVisible(False)
         self.anim = QPropertyAnimation(self.uih, b"geometry")
-        self.anim2 = QPropertyAnimation(self.cb, b"geometry")
-        self.anim3 = QPropertyAnimation(self.bb, b"geometry")
-        self.anim4 = QPropertyAnimation(self.nb, b"geometry")
 
-        self.cb.setVisible(True)
-        self.bb.setVisible(True)
         self.uih.setVisible(True)
-        self.nb.setVisible(True)
 
         self.anim.setDuration(300)
-        self.anim2.setDuration(300)
-        self.anim3.setDuration(300)
-        self.anim4.setDuration(300)
 
         self.anim.setStartValue(QRect(380,100,1180,820))
         self.anim.setEndValue(QRect(380,1000,1180,820))
 
-        self.anim2.setStartValue(QRect(400,120,100,100))
-        self.anim2.setEndValue(QRect(400,1000,100,100))
-
-        self.anim3.setStartValue(QRect(510,120,100,100))
-        self.anim3.setEndValue(QRect(510,1000,100,100))
-
-        self.anim4.setStartValue(QRect(620,120,100,100))
-        self.anim4.setEndValue(QRect(620,1000,100,100))
-
         self.anim.start()
-        self.anim2.start()
-        self.anim3.start()
-        self.anim4.start()
 
     def num_press(self,key_number):
         self.temp_nums.append(key_number)
@@ -306,8 +281,8 @@ class Window(QMainWindow,QWidget):
         self.container.setVisible(True)
         
     def openbrowser(self):
-        os.system("C:/Users/kim/Desktop/coding/KRIXT-os/browser/browser.exe")
-
+        #os.system("C:/Users/kim/Desktop/coding/KRIXT-os/browser/browser.exe")
+        print("this is bugged")
     def opennotes(self):
         self.nauih.setVisible(True)
         self.note.setVisible(True)
